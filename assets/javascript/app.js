@@ -30,7 +30,7 @@ $(document).ready(function(){
 
     // Constructing a queryURL using the animal name
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-      animal + "&api_key=dc6zaTOxFJmzC&limit=10";
+      animal + "&api_key=734LB9IAWwIgnKyEvKjRSj8pUKFwU5Oo&limit=10";
 
     // Performing an AJAX request with the queryURL
     $.ajax({
@@ -64,9 +64,34 @@ $(document).ready(function(){
           animalDiv.append(animalImage);
 
           // Prependng the animalDiv to the HTML page in the "#gifs-appear-here" div
-          $("#gifs-appear-here").prepend(animalDiv);
+          $("#gifs").prepend(animalDiv);
         }
       });
+  });
+
+//Pausing gifs EDIT
+
+/* Get equivalent of this into above
+
+<img src="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif" data-still="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif" data-animate="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200.gif" data-state="still" class="gif">
+  <img src="https://media2.giphy.com/media/8rFQp4kHXJ0gU/200_s.gif" data-still="https://media2.giphy.com/media/8rFQp4kHXJ0gU/200_s.gif" data-animate="https://media2.giphy.com/media/8rFQp4kHXJ0gU/200.gif" data-state="still" class="gif">
+  <img src="https://media3.giphy.com/media/W6LbnBigDe4ZG/200_s.gif" data-still="https://media3.giphy.com/media/W6LbnBigDe4ZG/200_s.gif" data-animate="https://media3.giphy.com/media/W6LbnBigDe4ZG/200.gif" data-state="still" class="gif">
+  
+*/
+
+$(".gifs").on("click", function() {
+    // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+    var state = $(this).attr("data-state");
+    // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+    // Then, set the image's data-state to animate
+    // Else set src to the data-still value
+    if (state === "still") {
+      $(this).attr("src", $(this).attr("data-animate"));
+      $(this).attr("data-state", "animate");
+    } else {
+      $(this).attr("src", $(this).attr("data-still"));
+      $(this).attr("data-state", "still");
+    }
   });
 
 //Form from NYT activity EDIT BELOW
