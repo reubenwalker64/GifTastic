@@ -6,25 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Giftastic</title>
     <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet"  href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <!--Bootsrap for 8/4 columns-->
 <body>
-<div class="row">
-    <div class="col-8">
-                
         <div class="container">
-            <div id="animals">
-                <button class="btn btn-info animal" data-animal="cat">Cat</button>
-                <button class="btn btn-info animal" data-animal="dog">Dog</button>
-                <button class="btn btn-info animal" data-animal="bird">Bird</button>
-                <button class="btn btn-info animal" data-animal="fish">Fish</button>
-        <!--add more-->
-            </div>
-        </div> 
+                <div id="animals">
+                    <button class="btn btn-info animal" data-animal="cat">Cat</button>
+                    <button class="btn btn-info animal" data-animal="dog">Dog</button>
+                    <button class="btn btn-info animal" data-animal="bird">Bird</button>
+                    <button class="btn btn-info animal" data-animal="fish">Fish</button>
+            <!--add more-->
+                </div>
+            </div> 
+        <br>
+        <br>
+
+<div class="row">
     
+    <div class="col-8"> 
         <!--gifs location-->
-        <div id="gifs"></div>
+        <div id="gifs">GIFS!</div>
     </div>
 
     <div class="col-4">
@@ -35,7 +37,7 @@
           <div class="card">
             <div class="card-header">
               <strong>
-                <i class="fa fa-list-alt"></i> Search Parameters</strong>
+                <i class="fa fa-list-alt"></i> Add an animal</strong>
             </div>
             <div class="card-body">
   
@@ -44,26 +46,14 @@
   
                 <!-- Here we create the text box for capturing the search term-->
                 <div class="form-group">
-                  <label for="search">Search Term:</label>
+                  <label for="search">Enter Animal Type:</label>
                   <input type="text" class="form-control" id="search-term">
-                </div>
-  
-                <!-- Here we capture the number of records that the user wants to retrieve  -->
-                <div class="form-group">
-                  <label for="pwd">Number of Records to Retrieve:</label>
-                  <select id="article-count" class="custom-select" aria-labelledby="dropdownMenuButton">
-                    <option selected value="1">1</option>
-                    <!-- Setting the option for 5 as default -->
-                    <option value="5" selected>5</option>
-                    <option value="10">10</option>
-                  </select>
                 </div>
 
               <!-- Here we have our final submit button -->
               <button type="submit" class="btn btn-default" id="run-search">
-                    <i class="fa fa-search"></i> Search</button>
-                  <button class="btn btn-default" id="clear-all">
-                    <i class="fa fa-trash"></i> Clear Results</button>
+                    <i class="fa fa-search"></i> Submit</button>
+                 
     
               </form>
             </div>
