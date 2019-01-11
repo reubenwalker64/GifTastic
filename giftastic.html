@@ -10,18 +10,27 @@
 </head>
 <!--Bootsrap for 8/4 columns-->
 <body>
-        <button data-animal="cat">meow</button>
-        <button data-animal="dog">woof</button>
-        <button data-animal="bird">chirp</button>
+<div class="row">
+    <div class="col-8">
+                
+        <div class="container">
+            <div id="animals">
+                <button class="btn btn-info animal" data-animal="cat">Cat</button>
+                <button class="btn btn-info animal" data-animal="dog">Dog</button>
+                <button class="btn btn-info animal" data-animal="bird">Bird</button>
+                <button class="btn btn-info animal" data-animal="fish">Fish</button>
         <!--add more-->
-        <div id="gifs-appear-here">
-        </div>
+            </div>
+        </div> 
+    
+        <!--gifs location-->
+        <div id="gifs"></div>
+    </div>
+
+    <div class="col-4">
 
     <!--Add form and EDIT BELOW--> 
-<!-- Row for Searching New York Times -->
-<div class="row">
-        <div class="col-sm-12">
-          <br>
+
           <!-- First card is for handling the search parameters -->
           <div class="card">
             <div class="card-header">
@@ -62,28 +71,14 @@
         </div>
 </div>
 
-<!-- This row will handle all of the retrieved articles. EDIT BELOW TO ADD BUTTONS -->
-    <div class="row">
-      <div class="col-sm-12">
-        <br>
 
-        <!-- This card will initially be made up of a card and wells for each of the articles retrieved -->
-        <div class="card">
-
-          <!-- card Heading for the retrieved articles box -->
-          <div class="card-header">
-            <strong>
-              <i class="fa fa-table"></i> Top Articles</strong>
-          </div>
-
-          <!-- This main card will hold each of the resulting articles -->
-          <div class="card-body" id="article-section">
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--added div closing tag-->
+   
+   
+<!--column div closing-->
 </div>
+<!--row div closing-->
+</div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!--Edit to my external JS file???--> 
