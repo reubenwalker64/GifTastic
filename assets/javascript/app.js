@@ -56,7 +56,7 @@ $(document).ready(function(){
 
           // Creating and storing an image tag
           var animalImage = $("<img/>");
-          animalImage.addClass("animalImage");
+          animalImage.addClass("image");
           // Setting the src attribute of the image to a property pulled off the result item
           animalImage.attr("src", results[i].images.fixed_height.url);
 
@@ -78,7 +78,7 @@ $(document).ready(function(){
 
 //Pausing gifs EDIT
 
-/* Get equivalent of this into above at Lines 59 and 63
+/* Get equivalent of comment below into above at Lines 59 and 63
 
 <img src="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif" data-still="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif" data-animate="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200.gif" data-state="still" class="gif">
   <img src="https://media2.giphy.com/media/8rFQp4kHXJ0gU/200_s.gif" data-still="https://media2.giphy.com/media/8rFQp4kHXJ0gU/200_s.gif" data-animate="https://media2.giphy.com/media/8rFQp4kHXJ0gU/200.gif" data-state="still" class="gif">
@@ -86,7 +86,7 @@ $(document).ready(function(){
   
 */
 
-$(".animalImage").on("click", function() {
+$(".image").on("click", function() {
     // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
     var state = $(this).attr("data-state");
     // If the clicked image's state is still, update its src attribute to what its data-animate value is.
@@ -108,12 +108,13 @@ $(".animalImage").on("click", function() {
  * @returns {string} URL for NYT API based on form inputs
  */
 function buildQueryURL() {
-    // queryURL is the url we'll use to query the API
-    var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?";
+    // queryURL is the url we'll use to query the API. TIE TO LINE 65 IN HTML???
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+    animal + "&api_key=734LB9IAWwIgnKyEvKjRSj8pUKFwU5Oo&limit=10";
   
     // Begin building an object to contain our API call's query parameters
     // Set the API key
-    var queryParams = { "api-key": "b9f91d369ff59547cd47b931d8cbc56b:0:74623931" };
+    var queryParams = { "api-key": "734LB9IAWwIgnKyEvKjRSj8pUKFwU5Oo" };
   
     // Grab text the user typed into the search input, add to the queryParams object
     queryParams.q = $("#search-term")
@@ -128,21 +129,21 @@ function buildQueryURL() {
 
 /**
  * takes API data (JSON/object) and turns it into elements on the page
- * @param {object} NYTData - object containing NYT API data
+ * @param {object} GiphyData - object containing NYT API data
  */
-function updatePage(NYTData) {
+function updatePage(GiphyData) {
   // Get from the form the number of results to display
   // API doesn't have a "limit" parameter, so we have to do this ourselves
   var numArticles = $("#article-count").val();
 
   // Log the NYTData to console, where it will show up as an object
-  console.log(NYTData);
+  console.log(GiphyData);
   console.log("------------------------------------");
 
   // Loop through and build elements for the defined number of articles
   for (var i = 0; i < numArticles; i++) {
     // Get specific article info for current index
-    var article = NYTData.response.docs[i];
+    var article = GiphyData.response.docs[i];
 
     // Increase the articleCount (track article # - starting at 1)
     var articleCount = i + 1;
@@ -153,44 +154,6 @@ function updatePage(NYTData) {
 
     // Add the newly created element to the DOM
     $("#article-section").append($articleList);
-
-    // If the article has a headline, log and append to $articleList
-    var headline = article.headline;
-    var $articleListItem = $("<li class='list-group-item articleHeadline'>");
-
-    if (headline && headline.main) {
-      console.log(headline.main);
-      $articleListItem.append(
-        "<span class='label label-primary'>" +
-          articleCount +
-          "</span>" +
-          "<strong> " +
-          headline.main +
-          "</strong>"
-      );
-    }
-
-    // If the article has a byline, log and append to $articleList
-    var byline = article.byline;
-
-    if (byline && byline.original) {
-      console.log(byline.original);
-      $articleListItem.append("<h5>" + byline.original + "</h5>");
-    }
-
-    // Log section, and append to document if exists
-    var section = article.section_name;
-    console.log(article.section_name);
-    if (section) {
-      $articleListItem.append("<h5>Section: " + section + "</h5>");
-    }
-
-    // Log published date, and append to document if exists
-    var pubDate = article.pub_date;
-    console.log(article.pub_date);
-    if (pubDate) {
-      $articleListItem.append("<h5>" + article.pub_date + "</h5>");
-    }
 
     // Append and log url
     $articleListItem.append("<a href='" + article.web_url + "'>" + article.web_url + "</a>");
