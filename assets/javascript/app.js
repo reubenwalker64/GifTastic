@@ -55,15 +55,22 @@ $(document).ready(function(){
           var p = $("<p>").text("Rating: " + results[i].rating);
 
           // Creating and storing an image tag
-          var animalImage = $("<img>");
+          var animalImage = $("<img/>");
+          animalImage.addClass("animalImage");
           // Setting the src attribute of the image to a property pulled off the result item
           animalImage.attr("src", results[i].images.fixed_height.url);
+
+          animalImage.attr('data-still', results[i].images.fixed_height_still.url)
+
+          animalImage.attr('data-animate', results[i].images.fixed_height.url)
+
+          .attr('data-state', 'still'); 
 
           // Appending the paragraph and image tag to the animalDiv
           animalDiv.append(p);
           animalDiv.append(animalImage);
 
-          // Prependng the animalDiv to the HTML page in the "#gifs-appear-here" div
+          // Prependng the animalDiv to the HTML page in the "#gifs" div
           $("#gifs").prepend(animalDiv);
         }
       });
@@ -71,7 +78,7 @@ $(document).ready(function(){
 
 //Pausing gifs EDIT
 
-/* Get equivalent of this into above
+/* Get equivalent of this into above at Lines 59 and 63
 
 <img src="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif" data-still="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif" data-animate="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200.gif" data-state="still" class="gif">
   <img src="https://media2.giphy.com/media/8rFQp4kHXJ0gU/200_s.gif" data-still="https://media2.giphy.com/media/8rFQp4kHXJ0gU/200_s.gif" data-animate="https://media2.giphy.com/media/8rFQp4kHXJ0gU/200.gif" data-state="still" class="gif">
@@ -79,7 +86,7 @@ $(document).ready(function(){
   
 */
 
-$(".gifs").on("click", function() {
+$(".animalImage").on("click", function() {
     // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
     var state = $(this).attr("data-state");
     // If the clicked image's state is still, update its src attribute to what its data-animate value is.
