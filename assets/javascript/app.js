@@ -78,14 +78,6 @@ $(document).ready(function(){
 
 //Pausing gifs EDIT
 
-/* Get equivalent of comment below into above at Lines 59 and 63
-
-<img src="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif" data-still="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif" data-animate="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200.gif" data-state="still" class="gif">
-  <img src="https://media2.giphy.com/media/8rFQp4kHXJ0gU/200_s.gif" data-still="https://media2.giphy.com/media/8rFQp4kHXJ0gU/200_s.gif" data-animate="https://media2.giphy.com/media/8rFQp4kHXJ0gU/200.gif" data-state="still" class="gif">
-  <img src="https://media3.giphy.com/media/W6LbnBigDe4ZG/200_s.gif" data-still="https://media3.giphy.com/media/W6LbnBigDe4ZG/200_s.gif" data-animate="https://media3.giphy.com/media/W6LbnBigDe4ZG/200.gif" data-state="still" class="gif">
-  
-*/
-
 $(document).on("click", ".image", function() {
     // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
     var state = $(this).attr("data-state");
@@ -108,16 +100,20 @@ $(document).on("click", ".image", function() {
  * @returns {string} URL for NYT API based on form inputs
  */
 function buildQueryURL() {
-    // queryURL is the url we'll use to query the API. TIE TO LINE 65 IN HTML???
+//variable
+  var animal = $(this).attr("search-term");
+
+
+    // queryURL is the url we'll use to query the API. 
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-    animal + "&api_key=734LB9IAWwIgnKyEvKjRSj8pUKFwU5Oo&limit=10";
+    searchAnimal + "&api_key=734LB9IAWwIgnKyEvKjRSj8pUKFwU5Oo&limit=10";
   
     // Begin building an object to contain our API call's query parameters
     // Set the API key
     var queryParams = { "api-key": "734LB9IAWwIgnKyEvKjRSj8pUKFwU5Oo" };
   
     // Grab text the user typed into the search input, add to the queryParams object
-    queryParams.q = $("#search-term")
+    queryParams.q = $("#searchAnimal")
       .val()
       .trim();
 
@@ -126,22 +122,22 @@ function buildQueryURL() {
   console.log(queryURL + $.param(queryParams));
   return queryURL + $.param(queryParams);
 }
-
-/**
+//CHANGE BELOW TO APPEND BUTTON TO ANIMALS DIV CLASS
+/*
  * takes API data (JSON/object) and turns it into elements on the page
  * @param {object} GiphyData - object containing NYT API data
  */
 function updatePage(GiphyData) {
   // Get from the form the number of results to display
   // API doesn't have a "limit" parameter, so we have to do this ourselves
-  var numArticles = $("#article-count").val();
+  var newAnimal = $("#searchAnimal").val();
 
   // Log the NYTData to console, where it will show up as an object
   console.log(GiphyData);
   console.log("------------------------------------");
 
   // Loop through and build elements for the defined number of articles
-  for (var i = 0; i < numArticles; i++) {
+  for (var i = 0; i < newAnimal; i++) {
     // Get specific article info for current index
     var article = GiphyData.response.docs[i];
 
