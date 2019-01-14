@@ -127,6 +127,68 @@ function buildQueryURL() {
  * takes API data (JSON/object) and turns it into elements on the page
  * @param {object} GiphyData - object containing NYT API data
  */
+//event handler
+$('#run-search').on('click', function (){
+  var animalButton = $("searchAnimal").val();
+  
+  event.preventDefault();
+ //add the new animal button
+ 
+  var newAnimalButton = $("<button/>").addClass ("btn btn-info animal").attr('data-animal', animalButton).html(animalButton);
+
+  $(animals).append(newAnimalButton);
+    console.log("It works?");
+
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+    animalButton + "&api_key=734LB9IAWwIgnKyEvKjRSj8pUKFwU5Oo&limit=10";
+    console.log (animalButton);
+
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  })
+  
+       // After data comes back from the request
+       .then(function(response) {
+        console.log(queryURL);
+
+        console.log(response);
+        // storing the data from the AJAX request in the results variable
+        var results = response.data;
+
+        // Looping through each result item
+        for (var i = 0; i < results.length; i++) {
+
+          // Creating and storing a div tag
+          var animalDiv = $("<div>");
+
+          // Creating a paragraph tag with the result item's rating
+          var p = $("<p>").text("Rating: " + results[i].rating);
+
+          // Creating and storing an image tag
+          var animalImage = $("<img>");
+          animalImage.addClass("image");
+          // Setting the src attribute of the image to a property pulled off the result item
+          animalImage.attr("src", results[i].images.fixed_height.url);
+
+          animalImage.attr('data-still', results[i].images.fixed_height_still.url)
+
+          animalImage.attr('data-animate', results[i].images.fixed_height.url)
+
+          animalImage.attr('data-state', 'still'); 
+
+          // Appending the paragraph and image tag to the animalDiv
+          animalDiv.append(p);
+          animalDiv.append(animalImage);
+
+          // Prependng the animalDiv to the HTML page in the "#gifs" div
+          $("#gifs").prepend(animalDiv);
+        }
+      });
+  });
+
+})
+/* 
 function updatePage(GiphyData) {
   // Get from the form the number of results to display
   // API doesn't have a "limit" parameter, so we have to do this ourselves
@@ -165,10 +227,12 @@ function clear() {
   $("#article-section").empty();
 }
 
+*/
+
 // CLICK HANDLERS
 // ==========================================================
 
-// .on("click") function associated with the Search Button
+/* .on("click") function associated with the Search Button
 $("#run-search").on("click", function(event) {
     // This line allows us to take advantage of the HTML "submit" property
     // This way we can hit enter on the keyboard and it registers the search
@@ -191,6 +255,4 @@ $("#run-search").on("click", function(event) {
   
   //  .on("click") function associated with the clear button
   $("#clear-all").on("click", clear);
-  
-
-});
+*/  
