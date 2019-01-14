@@ -129,10 +129,10 @@ function buildQueryURL() {
  */
 //event handler
 $('#run-search').on('click', function (){
-  var animalButton = $("searchAnimal").val();
+  var animalButton = $("#searchAnimal").val();
   
   event.preventDefault();
- //add the new animal button
+ //add the new animal button 
  
   var newAnimalButton = $("<button/>").addClass ("btn btn-info animal").attr('data-animal', animalButton).html(animalButton);
 
@@ -188,7 +188,7 @@ $('#run-search').on('click', function (){
   });
 
 })
-/* 
+/* EDIT AND PLACE ABOVE
 function updatePage(GiphyData) {
   // Get from the form the number of results to display
   // API doesn't have a "limit" parameter, so we have to do this ourselves
@@ -229,30 +229,3 @@ function clear() {
 
 */
 
-// CLICK HANDLERS
-// ==========================================================
-
-/* .on("click") function associated with the Search Button
-$("#run-search").on("click", function(event) {
-    // This line allows us to take advantage of the HTML "submit" property
-    // This way we can hit enter on the keyboard and it registers the search
-    // (in addition to clicks). Prevents the page from reloading on form submit.
-    event.preventDefault();
-  
-    // Empty the region associated with the articles
-    clear();
-  
-    // Build the query URL for the ajax request to the NYT API
-    var queryURL = buildQueryURL();
-  
-    // Make the AJAX request to the API - GETs the JSON data at the queryURL.
-    // The data then gets passed as an argument to the updatePage function
-    $.ajax({
-      url: queryURL,
-      method: "GET"
-    }).then(updatePage);
-  });
-  
-  //  .on("click") function associated with the clear button
-  $("#clear-all").on("click", clear);
-*/  
