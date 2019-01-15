@@ -27,6 +27,7 @@ $(document).ready(function(){
   $("button").on("click", function() {
     // Grabbing and storing the data-animal property value from the button
     var animal = $(this).attr("data-animal");
+    event.preventDefault();
 
     // Constructing a queryURL using the animal name
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
@@ -67,8 +68,8 @@ $(document).ready(function(){
           animalImage.attr('data-state', 'still'); 
 
           // Appending the paragraph and image tag to the animalDiv
-          animalDiv.append(p);
           animalDiv.append(animalImage);
+          animalDiv.append(p);
 
           // Prependng the animalDiv to the HTML page in the "#gifs" div
           $("#gifs").prepend(animalDiv);
@@ -84,21 +85,19 @@ $(document).on("click", ".image", function() {
     // If the clicked image's state is still, update its src attribute to what its data-animate value is.
     // Then, set the image's data-state to animate
     // Else set src to the data-still value
-    if (state === "still") {
-      $(this).attr("src", $(this).attr("data-animate"));
-      $(this).attr("data-state", "animate");
-    } else {
+    if (state === "animate") {
       $(this).attr("src", $(this).attr("data-still"));
       $(this).attr("data-state", "still");
+    } else {
+      $(this).attr("src", $(this).attr("data-animate"));
+      $(this).attr("data-state", "animate");
     }
   });
 
-//Form from NYT activity EDIT BELOW
 
-/**
- * pulls information from the form and build the query URL
- * @returns {string} URL for NYT API based on form inputs
- */
+//Form from NYT activity EDIT BELOW
+/*
+
 function buildQueryURL() {
 //variable
   var animal = $(this).attr("search-term");
@@ -123,16 +122,15 @@ function buildQueryURL() {
   return queryURL + $.param(queryParams);
 }
 //CHANGE BELOW TO APPEND BUTTON TO ANIMALS DIV CLASS
-/*
- * takes API data (JSON/object) and turns it into elements on the page
- */
+
+*/
 
 //event handler
 $('#run-search').on('click', function (){
   var animalButton = $("#searchAnimal").val();
-  
   event.preventDefault();
- //add the new animal button ADDING 10 RANDOM GIFS AT BOTTOM, SAME AS EMPTY FIELD + SUBMIT
+  
+ //add the new animal button !!!ADDING 10 RANDOM GIFS AT BOTTOM, SAME AS EMPTY FIELD + SUBMIT!!!
  
   var newAnimalButton = $("<button>").addClass ("btn btn-info animal").attr('data-animal', animalButton).html(animalButton);
 
@@ -160,34 +158,37 @@ $('#run-search').on('click', function (){
         for (var i = 0; i < results.length; i++) {
 
           // Creating and storing a div tag
-          var animalDiv = $("<div>");
-
-          // Creating a paragraph tag with the result item's rating
-          var p = $("<p>").text("Rating: " + results[i].rating);
+          var animalDiv = $("<div>");        
 
           // Creating and storing an image tag
           var animalImage = $("<img>");
           animalImage.addClass("image");
+
+          // Creating a paragraph tag with the result item's rating
+          var p = $("<p>").text("Rating: " + results[i].rating);
+
           // Setting the src attribute of the image to a property pulled off the result item
           animalImage.attr("src", results[i].images.fixed_height.url);
 
+          animalImage.attr('data-animate', results[i].images.fixed_height.url)
+          
           animalImage.attr('data-still', results[i].images.fixed_height_still.url)
 
-          animalImage.attr('data-animate', results[i].images.fixed_height.url)
-
-          animalImage.attr('data-state', 'still'); 
+          animalImage.attr('data-state', 'animate'); 
 
           // Appending the paragraph and image tag to the animalDiv
-          animalDiv.append(p);
           animalDiv.append(animalImage);
+          animalDiv.append(p);
 
           // Prependng the animalDiv to the HTML page in the "#gifs" div
           $("#gifs").prepend(animalDiv);
         }
       });
   });
+  $("#search-animal").val("");
+  return false;
 
-})
+});
 /* EDIT AND PLACE ABOVE
 function updatePage(GiphyData) {
   // Get from the form the number of results to display
