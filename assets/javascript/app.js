@@ -125,19 +125,19 @@ function buildQueryURL() {
 //CHANGE BELOW TO APPEND BUTTON TO ANIMALS DIV CLASS
 /*
  * takes API data (JSON/object) and turns it into elements on the page
- * @param {object} GiphyData - object containing NYT API data
  */
+
 //event handler
 $('#run-search').on('click', function (){
   var animalButton = $("#searchAnimal").val();
   
   event.preventDefault();
- //add the new animal button 
+ //add the new animal button ADDING 10 RANDOM GIFS AT BOTTOM, SAME AS EMPTY FIELD + SUBMIT
  
-  var newAnimalButton = $("<button/>").addClass ("btn btn-info animal").attr('data-animal', animalButton).html(animalButton);
+  var newAnimalButton = $("<button>").addClass ("btn btn-info animal").attr('data-animal', animalButton).html(animalButton);
 
   $(animals).append(newAnimalButton);
-    console.log("It works?");
+    console.log("It works!");
 
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
     animalButton + "&api_key=734LB9IAWwIgnKyEvKjRSj8pUKFwU5Oo&limit=10";
